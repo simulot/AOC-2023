@@ -23,6 +23,9 @@ type card struct {
 func readCards(lines []string) []card {
 	cards := make([]card, len(lines))
 	for c, l := range lines {
+		if len(l) == 0 {
+			continue
+		}
 		ss := strings.Split(l, ":")
 		ss = strings.Split(ss[1], "|")
 		winningNumber := scanNumber(ss[0])

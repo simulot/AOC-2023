@@ -18,6 +18,9 @@ func main() {
 func scratchCards(lines []string) int {
 	sum := 0
 	for _, l := range lines {
+		if len(l) == 0 {
+			continue
+		}
 		ss := strings.Split(l, ":")
 		ss = strings.Split(ss[1], "|")
 		winningNumber := scanNumber(ss[0])
