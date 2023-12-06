@@ -4,7 +4,6 @@ import (
 	"AOC2023/internal"
 	"fmt"
 	"math"
-	"strconv"
 	"strings"
 )
 
@@ -35,7 +34,7 @@ func readAlmanac(lines []string) Almanac {
 	mapIndex := -1
 	for _, l := range lines {
 		if a.Seeds == nil && len(l) > 0 {
-			a.Seeds = scanNumbers(strings.TrimPrefix(l, "seeds: "))
+			a.Seeds = internal.ScanNumbers(strings.TrimPrefix(l, "seeds: "))
 			continue
 		}
 		if strings.HasSuffix(l, "map:") {
@@ -43,7 +42,7 @@ func readAlmanac(lines []string) Almanac {
 			continue
 		}
 		if len(l) > 0 {
-			numbers := scanNumbers(l)
+			numbers := internal.ScanNumbers(l)
 			if len(numbers) != 3 {
 				panic("incorrect map")
 			}
@@ -76,17 +75,4 @@ func nearestSoil(a Almanac) int {
 		minSoil = min(minSoil, soil)
 	}
 	return minSoil
-}
-
-func scanNumbers(l string) []int {
-	ss := strings.Fields(l)
-	numbers := make([]int, len(ss))
-	for i, s := range ss {
-		n, err := strconv.Atoi(s)
-		if err != nil {
-			panic(err)
-		}
-		numbers[i] = n
-	}
-	return numbers
 }
