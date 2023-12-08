@@ -3,6 +3,7 @@ package main
 import (
 	"AOC2023/internal"
 	"fmt"
+	"strings"
 )
 
 func main() {
@@ -43,10 +44,18 @@ func readMap(lines []string) Map {
 }
 
 func getSteps(m Map) int {
-	node := "AAA"
+	steps := []int{}
+	for s := range m.nodes {
+		if strings.HasSuffix(s, "A") {
+			steps = append(steps, getStepsForNode(m, s))
+		}
+	}
+	return lcm(steps...)
+}
+func getStepsForNode(m Map, node string) int {
 	instruction := 0
 	steps := 0
-	for node != "ZZZ" {
+	for !strings.HasSuffix(node, "Z") {
 		turn := m.directions[instruction]
 		s := m.nodes[node]
 		switch turn {
@@ -59,4 +68,24 @@ func getSteps(m Map) int {
 		steps++
 	}
 	return steps
+}
+
+// greatest common divisor
+func gcd(a, b int) int {
+	for b != 0 {
+		a, b = b, a%b
+	}
+	return a
+}
+
+// least common multiple
+func lcm(n ...int) int {
+	if len(n) < 2 {
+		panic("lcm...")
+	}
+	r := n[0] * n[1] / gcd(n[0], n[1])
+	for _, i := range n[2:] {
+		r = lcm(r, i)
+	}
+	return r
 }
