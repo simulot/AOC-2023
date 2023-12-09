@@ -13,6 +13,7 @@ func main() {
 	lines, err := internal.ReadFile("../input")
 	if err != nil {
 		fmt.Println(err)
+		return
 	}
 
 	fmt.Println("Total winnings: ", getWinnings(readHands(lines)))

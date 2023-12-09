@@ -10,6 +10,7 @@ func main() {
 	lines, err := internal.ReadFile("../input")
 	if err != nil {
 		fmt.Println(err)
+		return
 	}
 
 	fmt.Println("Sum of power games: ", powerGames(lines))
