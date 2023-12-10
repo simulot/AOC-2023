@@ -29,3 +29,13 @@ func ScanNumbers(l string) []int {
 	}
 	return numbers
 }
+
+func FilterOutEmptyLines(lines []string) []string {
+	r := []string{}
+	for _, l := range lines {
+		if len(l) > 0 {
+			r = append(r, l)
+		}
+	}
+	return r
+}
