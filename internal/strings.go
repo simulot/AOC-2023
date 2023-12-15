@@ -39,3 +39,7 @@ func FilterOutEmptyLines(lines []string) []string {
 	}
 	return r
 }
+
+func CSVSplit(s string) []string {
+	return strings.Split(s, ",")
+}
